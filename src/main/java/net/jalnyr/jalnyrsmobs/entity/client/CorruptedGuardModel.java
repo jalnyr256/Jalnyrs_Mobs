@@ -5,6 +5,7 @@ package net.jalnyr.jalnyrsmobs.entity.client;// Made with Blockbench 5.2.2
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.jalnyr.jalnyrsmobs.entity.animation.CorruptedGuardAnimations;
 import net.jalnyr.jalnyrsmobs.entity.custom.CorruptedGuardEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -12,6 +13,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class CorruptedGuardModel extends HierarchicalModel<CorruptedGuardEntity> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -110,10 +112,23 @@ public class CorruptedGuardModel extends HierarchicalModel<CorruptedGuardEntity>
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+    private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {
+        pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
+        pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
 
+        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
+        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
+    }
 	@Override
 	public void setupAnim(CorruptedGuardEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
 
+        this.animateWalk(CorruptedGuardAnimations.WALK, limbSwing, limbSwingAmount, 2f, 1.5f);
+        this.animate(entity.getAnimationState("idle"), CorruptedGuardAnimations.IDLE, ageInTicks, 1f);
+        this.animate(entity.getAnimationState("attack"), CorruptedGuardAnimations.PUNCH, ageInTicks, 1f);
+        this.animate(entity.getAnimationState("attack2"), CorruptedGuardAnimations.SMASH, ageInTicks, 1f);
+        this.animate(entity.getAnimationState("attack3"), CorruptedGuardAnimations.BODY_SLAM, ageInTicks, 1f);
 	}
 
 	@Override

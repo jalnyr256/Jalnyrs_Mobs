@@ -1,12 +1,14 @@
 package net.jalnyr.jalnyrsmobs.entity.custom;
 
 import net.jalnyr.jalnyrsmobs.entity.ai.InternalAttackGoal;
+import net.jalnyr.jalnyrsmobs.entity.ai.InternalStateGoal;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -35,7 +38,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
     public AnimationState attack2AnimationState = new AnimationState();
     public AnimationState attack3AnimationState = new AnimationState();
     private int attack_cooldown = 0;
-    public static final int ATTACK_COOLDOWN = 40;
+    public static final int ATTACK_COOLDOWN = 20;
 
     private final ServerBossEvent bossEvent  = new ServerBossEvent(Component.literal("Corrupted Guard"),
             BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6);
@@ -51,7 +54,28 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,50,50,4.5F) {
+        //x slash
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,50,15,3.6F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
+            }
+
+        });
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,3,0,50,15,3.6F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
+            }
+
+            @Override
+            public void stop() {
+                super.stop();
+                CorruptedGuardEntity.this.attack_cooldown = ATTACK_COOLDOWN;
+            }
+
+        });
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,2,0,50,50,4.5F) {
             @Override
             public boolean canUse() {
                 return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 16f && CorruptedGuardEntity.this.attack_cooldown <= 0;
@@ -75,11 +99,11 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F)
                 .add(Attributes.ATTACK_DAMAGE, 8D)
-                .add(Attributes.MAX_HEALTH, 100D)
+                .add(Attributes.MAX_HEALTH, 500D)
                 .add(Attributes.ARMOR, 12)
-                .add(Attributes.ATTACK_SPEED, 2D)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.05);
+                .add(Attributes.ATTACK_SPEED, 1D)
+                .add(Attributes.ATTACK_KNOCKBACK, 1D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 3);
     }
 
     public @NotNull MobType getMobType() {
@@ -90,6 +114,10 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
     public AnimationState getAnimationState(String input) {
         if (input == "attack") {
             return this.attackAnimationState;
+        } else if (input == "attack2") {
+            return this.attack2AnimationState;
+        } else if (input == "attack3") {
+            return this.attack3AnimationState;
         } else if (input == "idle") {
             return this.idleAnimationState;
         } else {
@@ -103,6 +131,14 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
                 case 1 -> {
                     this.stopAllAnimationStates();
                     this.attackAnimationState.startIfStopped(this.tickCount);
+                }
+                case 2 -> {
+                    this.stopAllAnimationStates();
+                    this.attack2AnimationState.startIfStopped(this.tickCount);
+                }
+                case 3 -> {
+                    this.stopAllAnimationStates();
+                    this.attack3AnimationState.startIfStopped(this.tickCount);
                 }
             }
         }
@@ -119,6 +155,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
 
 
     public void stopAllAnimationStates() {
+        this.idleAnimationState.stop();
         this.attackAnimationState.stop();
         this.attack2AnimationState.stop();
         this.attack3AnimationState.stop();
@@ -127,6 +164,8 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
 
     public void handleEntityEvent(byte p_219360_) {
         this.attackAnimationState.start(this.tickCount);
+        this.attack2AnimationState.start(this.tickCount);
+        this.attack3AnimationState.start(this.tickCount);
     }
 
     public boolean doHurtTarget(Entity p_219472_) {
@@ -167,12 +206,30 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
 
         if(this.getAttackState() == 1) {
             if (this.attackTicks == 17) {
-                AreaAttack(dis*1.2f,dis * 3.6f,200,1.25F,0);
+                AreaAttack(dis*1.5f,dis * 3f,200,1.25F,0);
+            }
+        }
+        if(this.getAttackState() == 2) {
+            if (this.attackTicks == 17) {
+                AreaAttack(dis*2f,dis * 3f,200,2F,40);
+            }
+        }
+        if(this.getAttackState() == 3) {
+            if (this.attackTicks == 20) {
+                AreaAttack(dis*3f,dis * 3f,200,3F,40);
             }
         }
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
-
+    public static void disableShield(Player player, int ticks) {
+        if (!player.level().isClientSide) {
+            if (player.isBlocking()) {
+                player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
+                player.stopUsingItem();
+                player.level().broadcastEntityEvent(player, (byte)30);
+            }
+        }
+    }
     private void AreaAttack(float range, float height, float arc, float damage, int shieldbreakticks) {
         List<LivingEntity> entitiesHit = this.getEntityLivingBaseNearby(range, height, range, range);
         if (!this.level().isClientSide) {
@@ -191,6 +248,9 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!isAlliedTo(entityHit) && !(entityHit instanceof CorruptedGuardEntity) && entityHit != this) {
                         boolean flag = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    }
+                    if (entityHit.isDamageSourceBlocked(damagesource) && entityHit instanceof Player player && shieldbreakticks > 0) {
+                        disableShield(player, shieldbreakticks);
                     }
                 }
             }
