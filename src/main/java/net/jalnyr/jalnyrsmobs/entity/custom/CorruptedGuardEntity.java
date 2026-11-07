@@ -206,17 +206,17 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
 
         if(this.getAttackState() == 1) {
             if (this.attackTicks == 17) {
-                AreaAttack(dis*1.5f,dis * 3f,200,1.25F,0);
+                AreaAttack(dis*2f,dis * 3f,200,1.5F,0);
             }
         }
         if(this.getAttackState() == 2) {
             if (this.attackTicks == 17) {
-                AreaAttack(dis*2f,dis * 3f,200,2F,40);
+                AreaAttack(dis*2.1f,dis * 3f,200,2.3F,40);
             }
         }
         if(this.getAttackState() == 3) {
             if (this.attackTicks == 20) {
-                AreaAttack(dis*3f,dis * 3f,200,3F,40);
+                AreaAttack(dis*3f,dis * 3f,200,3F,80);
             }
         }
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
