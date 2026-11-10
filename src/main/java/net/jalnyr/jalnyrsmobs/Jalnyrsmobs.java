@@ -3,6 +3,7 @@ package net.jalnyr.jalnyrsmobs;
 import com.mojang.logging.LogUtils;
 import net.jalnyr.jalnyrsmobs.entity.ModEntities;
 import net.jalnyr.jalnyrsmobs.entity.client.CorruptedGuardRenderer;
+import net.jalnyr.jalnyrsmobs.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,6 +34,7 @@ public class Jalnyrsmobs
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         ModEntities.register(modEventBus);

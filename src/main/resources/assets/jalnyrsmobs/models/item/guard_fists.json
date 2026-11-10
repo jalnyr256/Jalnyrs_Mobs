@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "jalnyrsmobs:item/guard_fists3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "jalnyrsmobs:item/guard_fists3d"
+    },
+    "ground": {
+      "parent": "jalnyrsmobs:item/guard_fists3d"
+    },
+    "fixed": {
+      "parent": "jalnyrsmobs:item/guard_fists3d"
+    }
+  }
+}

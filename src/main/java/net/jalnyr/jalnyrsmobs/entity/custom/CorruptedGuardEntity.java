@@ -41,7 +41,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
     public static final int ATTACK_COOLDOWN = 20;
 
     private final ServerBossEvent bossEvent  = new ServerBossEvent(Component.literal("Corrupted Guard"),
-            BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6);
+            BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS);
 
     public int attackDamageModifier = 8;
 
@@ -55,7 +55,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         //x slash
-        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,50,15,3.6F){
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,40,15,3.6F){
             @Override
             public boolean canUse() {
                 return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
@@ -65,7 +65,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,3,0,50,15,3.6F){
             @Override
             public boolean canUse() {
-                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
+                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 30f;
             }
 
             @Override
@@ -78,7 +78,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,2,0,50,50,4.5F) {
             @Override
             public boolean canUse() {
-                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 16f && CorruptedGuardEntity.this.attack_cooldown <= 0;
+                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f && CorruptedGuardEntity.this.attack_cooldown <= 0;
             }
 
             @Override
@@ -190,12 +190,20 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         super.startSeenByPlayer(pServerPlayer);
         this.bossEvent.addPlayer(pServerPlayer);
     }
+    public void die(DamageSource p_21014_) {
+        super.die(p_21014_);
+        this.setAttackState(0);
+    }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer pServerPlayer) {
         super.stopSeenByPlayer(pServerPlayer);
         this.bossEvent.removePlayer(pServerPlayer);
     }
+    public boolean canBePushedByEntity(Entity entity) {
+        return false;
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
@@ -205,12 +213,12 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         float f2 = (float) Math.sin(Math.toRadians(this.getYRot() + 90));
 
         if(this.getAttackState() == 1) {
-            if (this.attackTicks == 17) {
+            if (this.attackTicks == 20) {
                 AreaAttack(dis*2f,dis * 3f,200,1.5F,0);
             }
         }
         if(this.getAttackState() == 2) {
-            if (this.attackTicks == 17) {
+            if (this.attackTicks == 20) {
                 AreaAttack(dis*2.1f,dis * 3f,200,2.3F,40);
             }
         }

@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "jalnyrsmobs:guard_chamber",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 53234312,
+
+    "spacing": 40,
+
+    "separation": 20,
+
+    "type": "minecraft:random_spread"
+  }
+}
