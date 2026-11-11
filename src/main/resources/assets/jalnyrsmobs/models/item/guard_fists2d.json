@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "jalnyrsweaponary:item/guard_fists3d"
+    "layer0": "jalnyrsmobs:item/guard_fists2d"
   }
 }

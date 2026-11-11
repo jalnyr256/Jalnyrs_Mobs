@@ -6,13 +6,13 @@
   },
   "perspectives": {
     "gui": {
-      "parent": "jalnyrsmobs:item/guard_fists3d"
+      "parent": "jalnyrsmobs:item/guard_fists2d"
     },
     "ground": {
       "parent": "jalnyrsmobs:item/guard_fists3d"
     },
     "fixed": {
-      "parent": "jalnyrsmobs:item/guard_fists3d"
+      "parent": "jalnyrsmobs:item/guard_fists2d"
     }
   }
 }
