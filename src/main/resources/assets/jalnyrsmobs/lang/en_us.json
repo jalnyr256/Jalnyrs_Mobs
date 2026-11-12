@@ -1,4 +1,8 @@
 {
   "item.jalnyrsmobs.guard_fists": "Guard Fists",
-  "tooltip.jalnyrsmobs.froststeel.tooltip": "§3Slows down targets"
+  "item.jalnyrsmobs.drugd_tail": "Drugd Tail",
+  "entity.jalnyrsmobs.corrupted_guard": "Corrupted Guard",
+  "entity.jalnyrsmobs.drugd": "Drugd",
+  "tooltip.jalnyrsmobs.froststeel.tooltip": "§3Slows down targets",
+  "creativetab.jalnyrsmobs": "jalnyr's mobs"
 }

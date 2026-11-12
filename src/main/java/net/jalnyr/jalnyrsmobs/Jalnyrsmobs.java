@@ -3,6 +3,8 @@ package net.jalnyr.jalnyrsmobs;
 import com.mojang.logging.LogUtils;
 import net.jalnyr.jalnyrsmobs.entity.ModEntities;
 import net.jalnyr.jalnyrsmobs.entity.client.CorruptedGuardRenderer;
+import net.jalnyr.jalnyrsmobs.entity.client.DrugdRenderer;
+import net.jalnyr.jalnyrsmobs.item.ModCreativeModeTabs;
 import net.jalnyr.jalnyrsmobs.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -35,7 +38,7 @@ public class Jalnyrsmobs
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         ModItems.register(modEventBus);
-
+        ModCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         ModEntities.register(modEventBus);
 
@@ -73,6 +76,7 @@ public class Jalnyrsmobs
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.CORRUPTED_GUARD.get(), CorruptedGuardRenderer::new);
+            EntityRenderers.register(ModEntities.DRUGD.get(), DrugdRenderer::new);
         }
     }
 }
