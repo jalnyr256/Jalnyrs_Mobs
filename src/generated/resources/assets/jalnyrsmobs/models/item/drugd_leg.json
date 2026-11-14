@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "jalnyrsmobs:item/drugd_tail"
+    "layer0": "jalnyrsmobs:item/drugd_leg"
   }
 }

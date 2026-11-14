@@ -17,7 +17,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        basicItem(ModItems.DRUGD_TAIL.get());
+        basicItem(ModItems.DRUGD_LEG.get());
 
         withExistingParent(ModItems.DRUGD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CORRUPTED_GUARD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

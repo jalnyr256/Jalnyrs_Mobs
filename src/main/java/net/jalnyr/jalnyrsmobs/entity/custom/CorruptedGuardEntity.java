@@ -244,7 +244,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         float f2 = (float) Math.sin(Math.toRadians(this.getYRot() + 90));
 
         if(this.getAttackState() == 1) {
-            if (this.attackTicks == 20) {
+            if (this.attackTicks == 17) {
                 this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
                 AreaAttack(dis*2f,dis * 3f,200,1.5F,0);
             }

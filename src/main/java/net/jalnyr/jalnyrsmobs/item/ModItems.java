@@ -15,7 +15,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, Jalnyrsmobs.MOD_ID);
     public static final RegistryObject<Item> GUARD_FISTS = ITEMS.register("guard_fists",
             ()-> new FistItem(Tiers.NETHERITE, 5, -2.4F, new Item.Properties().setNoRepair()));
-    public static final RegistryObject<Item> DRUGD_TAIL = ITEMS.register("drugd_tail",
+    public static final RegistryObject<Item> DRUGD_LEG = ITEMS.register("drugd_leg",
             ()-> new Item(new Item.Properties().food(ModFoods.DRUGD_TAIL)));
     public static final RegistryObject<Item> CORRUPTED_GUARD_SPAWN_EGG = ITEMS.register("corrupted_guard_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.CORRUPTED_GUARD, 0x1e3630, 0xc6d1c5, new Item.Properties()));

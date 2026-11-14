@@ -22,11 +22,11 @@
               "function": "minecraft:furnace_smelt"
             }
           ],
-          "name": "jalnyrsmobs:drugd_tail"
+          "name": "jalnyrsmobs:drugd_leg"
         }
       ],
       "rolls": 2.0
     }
   ],
-  "random_sequence": "jalnyrsmobs:entities/corrupted_guard"
+  "random_sequence": "jalnyrsmobs:entities/drugd"
 }
