@@ -129,6 +129,7 @@ public class CorruptedGuardModel extends HierarchicalModel<CorruptedGuardEntity>
         this.animate(entity.getAnimationState("attack"), CorruptedGuardAnimations.PUNCH, ageInTicks, 1.25f);
         this.animate(entity.getAnimationState("attack2"), CorruptedGuardAnimations.SMASH, ageInTicks, 1f);
         this.animate(entity.getAnimationState("attack3"), CorruptedGuardAnimations.BODY_SLAM, ageInTicks, 1f);
+        this.animate(entity.getAnimationState("attack4"), CorruptedGuardAnimations.DOUBLE_PUCNH, ageInTicks, 1f);
 	}
 
 	@Override

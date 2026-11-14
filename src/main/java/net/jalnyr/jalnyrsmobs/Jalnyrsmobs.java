@@ -6,6 +6,7 @@ import net.jalnyr.jalnyrsmobs.entity.client.CorruptedGuardRenderer;
 import net.jalnyr.jalnyrsmobs.entity.client.DrugdRenderer;
 import net.jalnyr.jalnyrsmobs.item.ModCreativeModeTabs;
 import net.jalnyr.jalnyrsmobs.item.ModItems;
+import net.jalnyr.jalnyrsmobs.sound.ModSounds;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,6 +43,7 @@ public class Jalnyrsmobs
         modEventBus.addListener(this::commonSetup);
         ModEntities.register(modEventBus);
 
+        ModSounds.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

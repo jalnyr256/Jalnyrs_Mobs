@@ -2,12 +2,14 @@ package net.jalnyr.jalnyrsmobs.entity.custom;
 
 import net.jalnyr.jalnyrsmobs.entity.ai.InternalAttackGoal;
 import net.jalnyr.jalnyrsmobs.entity.ai.InternalStateGoal;
+import net.jalnyr.jalnyrsmobs.sound.ModSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,6 +39,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
     public int attackAnimationTimeout = 0;
     public AnimationState attack2AnimationState = new AnimationState();
     public AnimationState attack3AnimationState = new AnimationState();
+    public AnimationState attack4AnimationState = new AnimationState();
     private int attack_cooldown = 0;
     public static final int ATTACK_COOLDOWN = 20;
 
@@ -56,6 +59,13 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         //x slash
         this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,40,15,3.6F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
+            }
+
+        });
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,4,0,60,15,3.6F){
             @Override
             public boolean canUse() {
                 return super.canUse() && CorruptedGuardEntity.this.getRandom().nextFloat() * 100.0F < 40f;
@@ -118,6 +128,8 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
             return this.attack2AnimationState;
         } else if (input == "attack3") {
             return this.attack3AnimationState;
+        } else if (input == "attack4") {
+            return this.attack4AnimationState;
         } else if (input == "idle") {
             return this.idleAnimationState;
         } else {
@@ -140,6 +152,10 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
                     this.stopAllAnimationStates();
                     this.attack3AnimationState.startIfStopped(this.tickCount);
                 }
+                case 4 -> {
+                    this.stopAllAnimationStates();
+                    this.attack4AnimationState.startIfStopped(this.tickCount);
+                }
             }
         }
 
@@ -159,6 +175,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.attackAnimationState.stop();
         this.attack2AnimationState.stop();
         this.attack3AnimationState.stop();
+        this.attack4AnimationState.stop();
     }
 
 
@@ -166,6 +183,7 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
         this.attackAnimationState.start(this.tickCount);
         this.attack2AnimationState.start(this.tickCount);
         this.attack3AnimationState.start(this.tickCount);
+        this.attack4AnimationState.start(this.tickCount);
     }
 
     public boolean doHurtTarget(Entity p_219472_) {
@@ -203,7 +221,20 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
     public boolean canBePushedByEntity(Entity entity) {
         return false;
     }
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.HIT.get();
+    }
 
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return ModSounds.HIT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.HIT.get();
+    }
     @Override
     public void aiStep() {
         super.aiStep();
@@ -214,16 +245,29 @@ public class CorruptedGuardEntity extends Internal_Animation_Monster{
 
         if(this.getAttackState() == 1) {
             if (this.attackTicks == 20) {
+                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
                 AreaAttack(dis*2f,dis * 3f,200,1.5F,0);
             }
         }
         if(this.getAttackState() == 2) {
             if (this.attackTicks == 20) {
+                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
                 AreaAttack(dis*2.1f,dis * 3f,200,2.3F,40);
             }
         }
         if(this.getAttackState() == 3) {
             if (this.attackTicks == 20) {
+                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
+                AreaAttack(dis*3f,dis * 3f,200,3F,80);
+            }
+        }
+        if(this.getAttackState() == 4) {
+            if (this.attackTicks == 17) {
+                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
+                AreaAttack(dis*3f,dis * 3f,200,3F,80);
+            }
+            if (this.attackTicks == 45) {
+                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
                 AreaAttack(dis*3f,dis * 3f,200,3F,80);
             }
         }
