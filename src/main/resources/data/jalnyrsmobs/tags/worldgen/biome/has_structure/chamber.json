@@ -3,7 +3,6 @@
 
   "_comment": " This biome tag can specify the biome directly. Or specify another biome tag by starting with # ",
   "values": [
-    "#minecraft:is_ocean",
     "#minecraft:is_river",
     "#minecraft:is_beach",
     "#minecraft:is_mountain",
@@ -12,7 +11,6 @@
     "#minecraft:is_jungle",
     "#minecraft:is_forest",
     "minecraft:stony_shore",
-    "minecraft:mushroom_fields",
     "minecraft:ice_spikes",
     "minecraft:windswept_savanna",
     "minecraft:desert",
