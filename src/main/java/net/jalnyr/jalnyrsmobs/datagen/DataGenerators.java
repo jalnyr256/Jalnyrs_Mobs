@@ -1,6 +1,7 @@
 package net.jalnyr.jalnyrsmobs.datagen;
 
 import net.jalnyr.jalnyrsmobs.Jalnyrsmobs;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -17,7 +18,11 @@ public class DataGenerators {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
+                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
     }
 }

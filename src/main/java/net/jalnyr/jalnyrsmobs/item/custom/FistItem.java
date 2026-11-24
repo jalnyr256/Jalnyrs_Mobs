@@ -10,31 +10,16 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FistItem extends TieredItem {
-    public FistItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
-        super(pTier, pProperties);
-        this.attackDamage = (float)pAttackDamageModifier + pTier.getAttackDamageBonus();
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
-        this.defaultModifiers = builder.build();
+public class FistItem extends SwordItem {
+
+    public FistItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }
-    private final float attackDamage;
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
-
-
-    public float getDamage() {
-        return this.attackDamage;
-    }
-
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
         return !pPlayer.isCreative();
     }
@@ -63,9 +48,6 @@ public class FistItem extends TieredItem {
     }
     public boolean isCorrectToolForDrops(BlockState pBlock) {
         return pBlock.is(Blocks.COBWEB);
-    }
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
-        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
     }
 
     @Override
