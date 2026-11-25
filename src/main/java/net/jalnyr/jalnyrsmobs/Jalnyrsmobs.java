@@ -3,7 +3,9 @@ package net.jalnyr.jalnyrsmobs;
 import com.mojang.logging.LogUtils;
 import net.jalnyr.jalnyrsmobs.entity.ModEntities;
 import net.jalnyr.jalnyrsmobs.entity.client.CorruptedGuardRenderer;
+import net.jalnyr.jalnyrsmobs.entity.client.DrugdBruteRenderer;
 import net.jalnyr.jalnyrsmobs.entity.client.DrugdRenderer;
+import net.jalnyr.jalnyrsmobs.entity.custom.DrugdBruteEntity;
 import net.jalnyr.jalnyrsmobs.item.ModCreativeModeTabs;
 import net.jalnyr.jalnyrsmobs.item.ModItems;
 import net.jalnyr.jalnyrsmobs.sound.ModSounds;
@@ -79,6 +81,7 @@ public class Jalnyrsmobs
         {
             EntityRenderers.register(ModEntities.CORRUPTED_GUARD.get(), CorruptedGuardRenderer::new);
             EntityRenderers.register(ModEntities.DRUGD.get(), DrugdRenderer::new);
+            EntityRenderers.register(ModEntities.DRUGD_BRUTE.get(), DrugdBruteRenderer::new);
         }
     }
 }

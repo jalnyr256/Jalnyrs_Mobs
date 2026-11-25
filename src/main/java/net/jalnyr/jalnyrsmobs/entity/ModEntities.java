@@ -1,7 +1,9 @@
 package net.jalnyr.jalnyrsmobs.entity;
 
 import net.jalnyr.jalnyrsmobs.Jalnyrsmobs;
+import net.jalnyr.jalnyrsmobs.entity.client.DrugdBruteRenderer;
 import net.jalnyr.jalnyrsmobs.entity.custom.CorruptedGuardEntity;
+import net.jalnyr.jalnyrsmobs.entity.custom.DrugdBruteEntity;
 import net.jalnyr.jalnyrsmobs.entity.custom.DrugdEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -20,6 +22,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<DrugdEntity>> DRUGD =
             ENTITY_TYPES.register("drugd", ()-> EntityType.Builder.of(DrugdEntity::new, MobCategory.CREATURE)
                     .sized(0.5f, 0.5f).build("drugd"));
+    public static final RegistryObject<EntityType<DrugdBruteEntity>> DRUGD_BRUTE =
+            ENTITY_TYPES.register("drugd_brute", ()-> EntityType.Builder.of(DrugdBruteEntity::new, MobCategory.MONSTER)
+                    .sized(1f, 1f).build("drugd_brute"));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

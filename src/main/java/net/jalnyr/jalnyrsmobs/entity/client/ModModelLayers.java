@@ -10,4 +10,6 @@ public class ModModelLayers {
             new ResourceLocation(Jalnyrsmobs.MOD_ID, "corrupted_guard_layer"), "main");
     public static final ModelLayerLocation DRUGD_LAYER = new ModelLayerLocation(
             new ResourceLocation(Jalnyrsmobs.MOD_ID, "drugd_layer"), "main");
+    public static final ModelLayerLocation DRUGD_BRUTE_LAYER = new ModelLayerLocation(
+            new ResourceLocation(Jalnyrsmobs.MOD_ID, "drugd_brute_layer"), "main");
 }

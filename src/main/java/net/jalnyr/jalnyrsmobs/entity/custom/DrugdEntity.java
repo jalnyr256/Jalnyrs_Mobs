@@ -67,7 +67,6 @@ public class DrugdEntity extends Animal {
                 .add(Attributes.MAX_HEALTH, 6D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1D)
                 .add(Attributes.FOLLOW_RANGE, 10D);
-
     }
 
     public boolean isPushedByFluid() {
