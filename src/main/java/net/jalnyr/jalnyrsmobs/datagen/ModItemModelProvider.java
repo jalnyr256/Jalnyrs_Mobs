@@ -18,7 +18,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         basicItem(ModItems.DRUGD_LEG.get());
-
+        basicItem(ModItems.DRUGD_BRUTE_SCALE.get());
         withExistingParent(ModItems.DRUGD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CORRUPTED_GUARD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }

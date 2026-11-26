@@ -2,9 +2,11 @@ package net.jalnyr.jalnyrsmobs.entity;
 
 import net.jalnyr.jalnyrsmobs.Jalnyrsmobs;
 import net.jalnyr.jalnyrsmobs.entity.client.DrugdBruteRenderer;
+import net.jalnyr.jalnyrsmobs.entity.client.DrugdMagicanModel;
 import net.jalnyr.jalnyrsmobs.entity.custom.CorruptedGuardEntity;
 import net.jalnyr.jalnyrsmobs.entity.custom.DrugdBruteEntity;
 import net.jalnyr.jalnyrsmobs.entity.custom.DrugdEntity;
+import net.jalnyr.jalnyrsmobs.entity.custom.DrugdMagicanEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,6 +27,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<DrugdBruteEntity>> DRUGD_BRUTE =
             ENTITY_TYPES.register("drugd_brute", ()-> EntityType.Builder.of(DrugdBruteEntity::new, MobCategory.MONSTER)
                     .sized(1f, 1f).build("drugd_brute"));
+    public static final RegistryObject<EntityType<DrugdMagicanEntity>> DRUGD_MAGICAN =
+            ENTITY_TYPES.register("drugd_magican", ()-> EntityType.Builder.of(DrugdMagicanEntity::new, MobCategory.MONSTER)
+                    .sized(2f, 2f).build("drugd_magican"));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

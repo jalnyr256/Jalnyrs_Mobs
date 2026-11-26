@@ -7,7 +7,7 @@
   "spawners": {
     "type": "jalnyrsmobs:drugd",
     "minCount": 2,
-    "maxCount": 4,
+    "maxCount": 3,
     "weight": 20
   }
 }

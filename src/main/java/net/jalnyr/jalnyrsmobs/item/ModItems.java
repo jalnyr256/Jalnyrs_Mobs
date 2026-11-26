@@ -17,6 +17,8 @@ public class ModItems {
             ()-> new FistItem(Tiers.NETHERITE, 4, -2.4F, new Item.Properties().setNoRepair()));
     public static final RegistryObject<Item> DRUGD_LEG = ITEMS.register("drugd_leg",
             ()-> new Item(new Item.Properties().food(ModFoods.DRUGD_TAIL)));
+    public static final RegistryObject<Item> DRUGD_BRUTE_SCALE = ITEMS.register("drugd_brute_scale",
+            ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CORRUPTED_GUARD_SPAWN_EGG = ITEMS.register("corrupted_guard_spawn_egg",
             ()-> new ForgeSpawnEggItem(ModEntities.CORRUPTED_GUARD, 0x1e3630, 0xc6d1c5, new Item.Properties()));
     public static final RegistryObject<Item> DRUGD_SPAWN_EGG = ITEMS.register("drugd_spawn_egg",

@@ -12,4 +12,6 @@ public class ModModelLayers {
             new ResourceLocation(Jalnyrsmobs.MOD_ID, "drugd_layer"), "main");
     public static final ModelLayerLocation DRUGD_BRUTE_LAYER = new ModelLayerLocation(
             new ResourceLocation(Jalnyrsmobs.MOD_ID, "drugd_brute_layer"), "main");
+    public static final ModelLayerLocation DRUGD_MAGICAN_LAYER = new ModelLayerLocation(
+            new ResourceLocation(Jalnyrsmobs.MOD_ID, "drugd_magican_layer"), "main");
 }

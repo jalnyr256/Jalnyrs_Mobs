@@ -26,6 +26,7 @@ import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,12 +50,13 @@ public class DrugdBruteEntity extends Internal_Animation_Monster{
         super(pEntityType, pLevel);
     }
 
+
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(2, new FollowPlayerGoal(this, 0.5D, true));
+        this.goalSelector.addGoal(2, new FollowPlayerGoal(this, 1D, true));
         this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,40,15,3.6F){
             @Override
             public boolean canUse() {
@@ -72,7 +74,7 @@ public class DrugdBruteEntity extends Internal_Animation_Monster{
     public static AttributeSupplier.Builder CreateAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.01F)
+                .add(Attributes.MOVEMENT_SPEED, 0.25F)
                 .add(Attributes.ATTACK_DAMAGE, 2D)
                 .add(Attributes.MAX_HEALTH, 30D)
                 .add(Attributes.ARMOR, 0)

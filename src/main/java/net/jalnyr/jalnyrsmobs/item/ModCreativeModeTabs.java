@@ -17,6 +17,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.jalnyrsmobs"))
                     .displayItems((pParametres, pOutput) -> {
                         pOutput.accept(ModItems.DRUGD_LEG.get());
+                        pOutput.accept(ModItems.DRUGD_BRUTE_SCALE.get());
                         pOutput.accept(ModItems.GUARD_FISTS.get());
                         pOutput.accept(ModItems.DRUGD_SPAWN_EGG.get());
                         pOutput.accept(ModItems.CORRUPTED_GUARD_SPAWN_EGG.get());

@@ -2,10 +2,7 @@ package net.jalnyr.jalnyrsmobs.event;
 
 
 import net.jalnyr.jalnyrsmobs.Jalnyrsmobs;
-import net.jalnyr.jalnyrsmobs.entity.client.CorruptedGuardModel;
-import net.jalnyr.jalnyrsmobs.entity.client.DrugdBruteModel;
-import net.jalnyr.jalnyrsmobs.entity.client.DrugdModel;
-import net.jalnyr.jalnyrsmobs.entity.client.ModModelLayers;
+import net.jalnyr.jalnyrsmobs.entity.client.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,6 +15,7 @@ public class ModEventBusClientEvents {
         event.registerLayerDefinition(ModModelLayers.CORRUPTED_GUARD_LAYER, CorruptedGuardModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.DRUGD_LAYER, DrugdModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.DRUGD_BRUTE_LAYER, DrugdBruteModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.DRUGD_MAGICAN_LAYER, DrugdMagicanModel::createBodyLayer);
     }
 
 
