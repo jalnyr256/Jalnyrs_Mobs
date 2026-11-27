@@ -26,6 +26,8 @@ import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,21 +58,14 @@ public class DrugdMagicanEntity extends Internal_Animation_Monster{
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(2, new FollowPlayerGoalMagican(this, 1D, true));
-        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,1,0,60,20,8F){
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,3,0,60,20,6F){
             @Override
             public boolean canUse() {
                 return super.canUse() && DrugdMagicanEntity.this.getRandom().nextFloat() * 100.0F < 16f;
             }
 
         });
-        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,3,0,60,20,8F){
-            @Override
-            public boolean canUse() {
-                return super.canUse() && DrugdMagicanEntity.this.getRandom().nextFloat() * 100.0F < 16f;
-            }
-
-        });
-        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,2,0,60,15,3.6F){
+        this.goalSelector.addGoal(1, new InternalAttackGoal(this,0,2,0,60,15,4F){
             @Override
             public boolean canUse() {
                 return super.canUse() && DrugdMagicanEntity.this.getRandom().nextFloat() * 100.0F < 16f;
@@ -199,13 +194,6 @@ public class DrugdMagicanEntity extends Internal_Animation_Monster{
 
         float f1 = (float) Math.cos(Math.toRadians(this.getYRot() + 90));
         float f2 = (float) Math.sin(Math.toRadians(this.getYRot() + 90));
-
-        if(this.getAttackState() == 1) {
-            if (this.attackTicks == 40) {
-                this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
-                AreaAttack(dis*5f,dis * 4f,200,1.5F,0);
-            }
-        }
         if(this.getAttackState() == 2) {
             if (this.attackTicks == 27) {
                 this.playSound(ModSounds.HIT.get(), 4F, 1.2f);
